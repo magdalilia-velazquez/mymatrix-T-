@@ -101,9 +101,6 @@ public:
     if (C < 1)
       throw invalid_argument("mymatrix::constructor: # of cols");
 
-    //
-    // TODO
-    //
     Rows = new ROW[R];  // an array with R ROW structs:
     NumRows = R;
 
@@ -247,9 +244,12 @@ public:
     if (C < 1)
       throw invalid_argument("mymatrix::grow: # of cols");
 
-    //
-    // TODO:
-    //
+    // Check if the rows are growing or shrinking 
+    if (R <= NumRows) // Not growing, shrinking
+        return;
+        
+    
+    
   }
 
 
@@ -260,11 +260,16 @@ public:
   //
   int size() const
   {
-    //
-    // TODO
-    //
-
-    return -1;
+    int matrixSize; 
+    
+    // loops through each row
+    for (int i = 0; i <= NumRows; i++) 
+    {
+        // increases the matrixSize by the number of columns in each row
+        matrixSize += Rows[r].NumCols;
+    }
+    
+    return matrixSize;
   }
 
 
@@ -284,13 +289,10 @@ public:
     if (c < 0 || c >= Rows[r].NumCols)
       throw invalid_argument("mymatrix::at: col");
 
-    //
-    // TODO
-    //
+    //T temp = {};  // we need to return something, so a temp for now:
 
-    T temp = {};  // we need to return something, so a temp for now:
-
-    return temp;
+    //return temp;
+    return Rows[r].Cols[c];
   }
 
 
@@ -412,4 +414,3 @@ public:
   }
 
 };
-
