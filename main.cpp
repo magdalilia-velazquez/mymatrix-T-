@@ -46,7 +46,7 @@ int main()
     cout << endl;
     
     // calling grow()
-    M3.grow(10, 5);
+    M3.grow(4, 1);
     M3._output();
     cout << endl;
     
