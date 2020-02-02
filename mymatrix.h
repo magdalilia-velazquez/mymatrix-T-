@@ -265,13 +265,13 @@ public:
   //
   int size() const
   {
-    int matrixSize; 
+    int matrixSize = 0; 
     
     // loops through each row
-    for (int i = 0; i <= NumRows; i++) 
+    for (int r = 0; r < NumRows; r++) 
     {
         // increases the matrixSize by the number of columns in each row
-        matrixSize += Rows[i].NumCols;
+        matrixSize += Rows[r].NumCols;
     }
     
     return matrixSize;
