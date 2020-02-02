@@ -132,19 +132,19 @@ public:
   mymatrix(const mymatrix<T>& other)
   {
 
-    this->Rows = new other.ROW[4];  // an array with 4 ROW structs:
     this->NumRows = other.NumRows;
+    this->Rows = new ROW[NumRows]; 
 
-    // initialize each row to have 4 columns:
+    // initialize each row to have NumRows columns:
     for (int r = 0; r < other.NumRows; ++r)
     {
-      this->Rows[r].Cols = new other.T[4];  // an array with 4 elements of type T:
       this->Rows[r].NumCols = other.Rows[r].NumCols;
+      this->Rows[r].Cols = new T[Rows[r].NumCols];  // an array with NumCols elements of type T:    
 
       // initialize the elements to their default value:
-      for (int c = 0; c < other.Rows[r].NumCols; ++c)
+      for (int c = 0; c < Rows[r].NumCols; ++c)
       {
-        this->Rows[r].Cols[c] = other.T{};  // default value for type T:
+        this->Rows[r].Cols[c] = other.Rows[r].Cols[c];  
       }
     }
   }
@@ -247,7 +247,12 @@ public:
     // Check if the rows are growing or shrinking 
     if (R <= NumRows) // Not growing, shrinking
         return;
-        
+    
+    mymatrix(R, C);
+    
+    
+    
+    
     
     
   }
@@ -266,7 +271,7 @@ public:
     for (int i = 0; i <= NumRows; i++) 
     {
         // increases the matrixSize by the number of columns in each row
-        matrixSize += Rows[r].NumCols;
+        matrixSize += Rows[i].NumCols;
     }
     
     return matrixSize;
@@ -289,9 +294,6 @@ public:
     if (c < 0 || c >= Rows[r].NumCols)
       throw invalid_argument("mymatrix::at: col");
 
-    //T temp = {};  // we need to return something, so a temp for now:
-
-    //return temp;
     return Rows[r].Cols[c];
   }
 
@@ -312,9 +314,6 @@ public:
     if (c < 0 || c >= Rows[r].NumCols)
       throw invalid_argument("mymatrix::(): col");
 
-    //T temp = {};  // we need to return something, so a temp for now:
-
-    //return temp;
     return Rows[r].Cols[c];
   }
 
