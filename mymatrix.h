@@ -210,7 +210,7 @@ public:
     {
         newRow[i] = Rows[r].Cols[i];
     }
-    for (int j = Rows[r].NumCols; j < C; j++)
+    for (int j = Rows[r].NumCols; j < C; ++j)
     {
         newRow[j] = T{};
     }
@@ -248,12 +248,16 @@ public:
     if (R <= NumRows) // Not growing, shrinking
         return;
     
-    mymatrix(R, C);
-    
-    
-    
-    
-    
+    for (int r = NumRows; r < R; ++r) {
+        T* newRow = new T[C];
+        for (int i = 0; i < C; ++i) {
+            newRow[i] = T{};
+        }
+        Rows[r].NumCols = C;
+        
+    }
+        
+
     
   }
 
@@ -268,7 +272,7 @@ public:
     int matrixSize = 0; 
     
     // loops through each row
-    for (int r = 0; r < NumRows; r++) 
+    for (int r = 0; r < NumRows; ++r) 
     {
         // increases the matrixSize by the number of columns in each row
         matrixSize += Rows[r].NumCols;
